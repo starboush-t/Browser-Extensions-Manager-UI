@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <ThemeProvider >
-      <div className="bg-white dark:bg-gray-600 w-full h-screen">
+      <div className="light-gradient dark:dark-gradient w-full h-screen px-4 py-5">
         <Header />
       </div>
       </ThemeProvider>

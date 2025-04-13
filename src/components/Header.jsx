@@ -5,12 +5,12 @@ const Header = () => {
   return (
     <header>
       <div>
-        <div className="">
+        <div className="flex justify-between bg-white dark:bg-gray-800 rounded-lg shadow-lg px-3 py-2">
           <img src={Logo} />
           <DarkModeToggler />
         </div>
         <div>
-          <h1>Extensions List</h1>
+          <h1 className="font-noto">Extensions List</h1>
         </div>
       </div>
     </header>
