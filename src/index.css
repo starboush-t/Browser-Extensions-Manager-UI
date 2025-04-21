@@ -1,7 +1,58 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold text-gray-800 dark:text-white font-noto;
+  }
+
+  h2 {
+    @apply text-2xl font-light   text-gray-800 dark:text-white font-noto;
+  }
+
+  button {
+    @apply bg-gray-50 
+    text-gray-700 
+      border-[1px] 
+    border-gray-200    
+      font-noto 
+      rounded-full 
+      px-5 py-2 
+
+    /* focus:bg-red-700  */
+    focus:text-gray-50  
+    focus:border-2
+      focus:outline-2
+      focus:outline-red-500
+
+    hover:bg-red-700
+    /* hover:border-red-700  */
+      hover:cursor-pointer
+    hover:text-white
+
+      dark:border-[1px] 
+    dark:bg-gray-800
+    dark:border-gray-600 
+    dark:text-white
+
+    dark:focus:text-blue-900 
+    dark:focus:outline-2
+    dark:focus:outline-red-500
+    dark:focus:border-2 
+      dark:focus:border-blue-900
+
+    dark:hover:bg-gray-600
+    dark:hover:border-gray-600;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-white rounded-lg shadow-md p-4;
+  }
+}
 
 @theme {
   /* Typography */

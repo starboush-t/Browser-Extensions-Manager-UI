@@ -1,12 +1,13 @@
 import Extension from "./extension";
+import data from "../../data.json";
 
 function Extensions() {
-    return (
-        <>
-            <h2 className="text-center text-2xl">Extensions</h2>
-            <Extension />
-        </>
-    )
+  // console.log(data);
+  return (
+    <section className="w-full">
+      <Extension />
+    </section>
+  );
 }
 
 export default Extensions;
