@@ -4,6 +4,7 @@ const SliderToggle = ({ isActive }) => {
   const [isToggled, setIsToggled] = useState(isActive);
 
   const handleToggle = () => {
+    console.log(!isToggled);
     setIsToggled(!isToggled);
   };
 

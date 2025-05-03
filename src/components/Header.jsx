@@ -3,7 +3,6 @@ import DarkModeToggler from "./DarkModeToggler";
 import Filter from "./Filter";
 
 const Header = () => {
-  
   return (
     <header className="lg:mb-7">
       <section className="flex flex-col lg:gap-10">
@@ -11,7 +10,6 @@ const Header = () => {
           <img src={Logo} className="stroke-transparent " />
           <DarkModeToggler />
         </div>
-        <Filter />
       </section>
     </header>
   );
