@@ -4,7 +4,7 @@ import { useState } from "react";
 import Filter from "./Filter";
 
 const fetchData = async () => {
-  const response = await fetch("../../data.json"); // Replace with your JSON file path or API endpoint
+  const response = await fetch("http://localhost:3000/extensions"); // Replace with your JSON file path or API endpoint
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -12,17 +12,23 @@ const fetchData = async () => {
 };
 
 function Extension() {
-  const [filteredData, setFilteredData] = useState("all"); // Default filter is 'all'
+  const [filter, setFilter] = useState("all"); // Default filter is 'all'
   const [active, setActive] = useState(false); // State to manage the toggle button
 
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["extension"],
+    queryKey: ["extension", { filter }],
     queryFn: fetchData,
+    staleTime: 1000 * 10,
   });
 
+  const removeExtension = (id) => {
+    // Logic to remove the extension
+    console.log(`Removing extension with id: ${id}`);
+  };
+
   const filteredExtensions = data?.filter((ext) => {
-    if (filteredData === "active") return ext.isActive;
-    if (filteredData === "inactive") return !ext.isActive;
+    if (filter === "active") return ext.isActive;
+    if (filter === "inactive") return !ext.isActive;
     return true; // Show all extensions
   });
 
@@ -31,7 +37,7 @@ function Extension() {
 
   return (
     <section>
-      <Filter filteredData={filteredData} setFilteredData={setFilteredData} />
+      <Filter filter={filter} setFilter={setFilter} />
       <div className="mt-5 grid lg:grid-cols-3 w-full md:gap-4 md:grid-cols-2 gap-4">
         {filteredExtensions?.map((extension) => (
           <div
@@ -50,7 +56,10 @@ function Extension() {
               </div>
             </div>
             <div className="flex justify-between items-center">
-              <button className="button dark:hover:bg-red-500 dark:hover:text-blue-900">
+              <button
+                onClick={removeExtension}
+                className="button dark:hover:bg-red-500 dark:hover:text-blue-900"
+              >
                 Remove
               </button>
               <ToggleButton
