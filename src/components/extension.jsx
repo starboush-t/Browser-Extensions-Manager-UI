@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import ToggleButton from "./ToggleButton";
 import { useState } from "react";
 import Filter from "./Filter";
@@ -11,9 +11,20 @@ const fetchData = async () => {
   return response.json();
 };
 
+const deleteExtension = async (id) => {
+  const response = await fetch(`http://localhost:3000/extensions/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete extension");
+  }
+  return id;
+};
+
 function Extension() {
   const [filter, setFilter] = useState("all"); // Default filter is 'all'
   const [active, setActive] = useState(false); // State to manage the toggle button
+  const queryClient = useQueryClient();
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["extension", { filter }],
@@ -21,9 +32,17 @@ function Extension() {
     staleTime: 1000 * 10,
   });
 
+ const mutation = useMutation({
+  mutationFn: deleteExtension,
+  onSuccess: (id) => {
+    queryClient.setQueryData(["extension", { filter }], (oldData) =>
+      oldData.filter((ext) => ext.id !== id)
+    );
+  },
+});
+
   const removeExtension = (id) => {
-    // Logic to remove the extension
-    console.log(`Removing extension with id: ${id}`);
+    mutation.mutate(id);
   };
 
   const filteredExtensions = data?.filter((ext) => {
@@ -57,7 +76,7 @@ function Extension() {
             </div>
             <div className="flex justify-between items-center">
               <button
-                onClick={removeExtension}
+                onClick={() => removeExtension(extension.id)}
                 className="button dark:hover:bg-red-500 dark:hover:text-blue-900"
               >
                 Remove
