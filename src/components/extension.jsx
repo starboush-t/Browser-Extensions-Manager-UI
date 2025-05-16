@@ -12,13 +12,27 @@ const fetchData = async () => {
 };
 
 const deleteExtension = async (id) => {
+  // const response = await fetch(`http://localhost:3000/extensions/${id}`, {
+  //   method: "DELETE",
+  // });
+  // if (!response.ok) {
+  //   throw new Error("Failed to delete extension");
+  // }
+  return id;
+};
+
+const toggleButton = async ({ id, newValue }) => {
   const response = await fetch(`http://localhost:3000/extensions/${id}`, {
-    method: "DELETE",
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ isActive: newValue }),
   });
   if (!response.ok) {
-    throw new Error("Failed to delete extension");
+    throw new Error("Failed to toggle button");
   }
-  return id;
+  return { id, newValue };
 };
 
 function Extension() {
@@ -29,19 +43,56 @@ function Extension() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["extension", { filter }],
     queryFn: fetchData,
-    staleTime: 1000 * 10,
+    staleTime: 1000,
   });
 
- const mutation = useMutation({
-  mutationFn: deleteExtension,
-  onSuccess: (id) => {
-    queryClient.setQueryData(["extension", { filter }], (oldData) =>
-      oldData.filter((ext) => ext.id !== id)
-    );
-  },
-});
+  const mutation = useMutation({
+    mutationFn: deleteExtension,
+    onSuccess: (id) => {
+      queryClient.setQueryData(["extension", { filter }], (oldData) =>
+        oldData.filter((ext) => ext.id !== id)
+      );
+    },
+  });
+
+  // const toggleMutation = useMutation({
+  //   mutationFn: toggleButton,
+  //   onSuccess: (id) => {
+  //     queryClient.setQueryData(["extension", { filter }], (oldData) =>
+  //       oldData.map((ext) =>
+  //         ext.id === id ? { ...ext, isActive: !ext.isActive } : ext
+  //       )
+  //     );
+  //   },
+  // });
+
+  // const handleToggle = (id) => {
+  //   toggleMutation.mutate(id);
+  // };
+
+  const toggleMutation = useMutation({
+    mutationFn: toggleButton,
+    onSuccess: ({ id, newValue }) => {
+      queryClient.setQueryData(["extension", { filter }], (oldData) =>
+        oldData.map((ext) =>
+          ext.id === id ? { ...ext, isActive: newValue } : ext
+        )
+      );
+    },
+  });
+
+  const handleToggle = (id, currentValue) => {
+    toggleMutation.mutate({ id, newValue: !currentValue });
+  };
 
   const removeExtension = (id) => {
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this extension?"
+    // );
+    // if (confirmDelete) {
+    //   mutation.mutate(id);
+    // }
+
     mutation.mutate(id);
   };
 
@@ -85,6 +136,10 @@ function Extension() {
                 isActive={extension.isActive}
                 active={active}
                 setActive={setActive}
+                // handleToggle={() => handleToggle(extension.id)}
+                handleToggle={() =>
+                  handleToggle(extension.id, extension.isActive)
+                }
               />
             </div>
           </div>

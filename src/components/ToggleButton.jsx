@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-const SliderToggle = ({ isActive }) => {
+const ToggleButton = ({ isActive, handleToggle }) => {
   const [isToggled, setIsToggled] = useState(isActive);
 
-  const handleToggle = () => {
+  const handleToggles = () => {
     console.log(!isToggled);
     setIsToggled(!isToggled);
+    handleToggle();
   };
 
   return (
@@ -15,7 +16,7 @@ const SliderToggle = ({ isActive }) => {
           ? "bg-red-700 dark:bg-red-500"
           : "bg-gray-200 dark:bg-gray-300"
       }`}
-      onClick={handleToggle}
+      onClick={handleToggles}
     >
       <div
         className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${
@@ -26,4 +27,5 @@ const SliderToggle = ({ isActive }) => {
   );
 };
 
-export default SliderToggle;
+export default ToggleButton;
+
