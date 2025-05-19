@@ -4,7 +4,7 @@ import data from "../../data.json";
 function Extensions() {
   // console.log(data);
   return (
-    <section className="flex  ">
+    <section className="flex  transition-colors duration-300">
       <Extension />
     </section>
   );

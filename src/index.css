@@ -31,6 +31,8 @@
     /* hover:border-red-700  */
       hover:cursor-pointer
     hover:text-white
+    hover:transition-colors
+    duration-500
 
       dark:border-[1px] 
     dark:bg-gray-800
@@ -55,6 +57,17 @@
 }
 
 @theme {
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      transform: 0.5;
+    }
+  }
+
   /* Typography */
 
   --font-noto: "Noto Sans", sans-serif;

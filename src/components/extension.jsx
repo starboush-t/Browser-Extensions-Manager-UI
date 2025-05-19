@@ -91,7 +91,7 @@ function Extension() {
   if (isError) return <div>Error fetching data</div>;
 
   return (
-    <section className="flex flex-1 flex-col ">
+    <section className="flex flex-1 flex-col transition-colors duration-300">
       <Filter filter={filter} setFilter={setFilter} />
       <div className="mt-5 grid lg:grid-cols-3 w-full  md:gap-4 md:grid-cols-2 gap-4">
         {filteredExtensions?.map((extension) => (
@@ -113,7 +113,8 @@ function Extension() {
             <div className="flex justify-between items-center">
               <button
                 onClick={() => removeExtension(extension.id)}
-                className="button dark:hover:bg-red-500 dark:hover:text-blue-900"
+                className="button dark:hover:bg-red-500 hover:transition-colors duration-500 
+                hover:text-white"
               >
                 Remove
               </button>

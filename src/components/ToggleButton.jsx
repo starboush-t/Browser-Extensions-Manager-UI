@@ -11,7 +11,7 @@ const ToggleButton = ({ isActive, handleToggle }) => {
 
   return (
     <div
-      className={`w-16 h-8 flex items-center rounded-full p-1 cursor-pointer ${
+      className={`transition-colors duration-600 w-16 h-8 flex items-center rounded-full p-1 cursor-pointer ${
         isToggled
           ? "bg-red-700 dark:bg-red-500"
           : "bg-gray-200 dark:bg-gray-300"
@@ -19,7 +19,7 @@ const ToggleButton = ({ isActive, handleToggle }) => {
       onClick={handleToggles}
     >
       <div
-        className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${
+        className={` w-6 h-6 bg-white rounded-full shadow-md transform duration-300 transition-transform ${
           isToggled ? "translate-x-8" : "translate-x-0"
         }`}
       ></div>

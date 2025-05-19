@@ -1,6 +1,6 @@
 const Filter = ({ filter, setFilter }) => {
   return (
-    <section className="mt-6 flex flex-col justify-center items-center gap-3 md:flex-row md:gap-0 md:justify-between w-full">
+    <section className="transition-colors duration-300 mt-6 flex flex-col justify-center items-center gap-3 md:flex-row md:gap-0 md:justify-between w-full">
       <div className="w-full text-center md:text-left">
         <h1 className="font-noto w-full">Extensions List</h1>
       </div>
