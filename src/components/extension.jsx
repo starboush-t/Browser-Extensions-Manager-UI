@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import ToggleButton from "./ToggleButton";
 import { useState } from "react";
 import Filter from "./Filter";
+import ConfirmModal from "./ConfirmModal";
 
 const fetchData = async () => {
   const response = await fetch("http://localhost:3000/extensions"); // Replace with your JSON file path or API endpoint
@@ -38,6 +39,8 @@ const toggleButton = async ({ id, newValue }) => {
 function Extension() {
   const [filter, setFilter] = useState("all"); // Default filter is 'all'
   const [active, setActive] = useState(false); // State to manage the toggle button
+  const [modalOpen, setModalOpen] = useState(false);
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
   const queryClient = useQueryClient();
 
   const { data, isError, isLoading } = useQuery({
@@ -70,15 +73,33 @@ function Extension() {
     toggleMutation.mutate({ id, newValue: !currentValue });
   };
 
-  const removeExtension = (id) => {
-    // const confirmDelete = window.confirm(
-    //   "Are you sure you want to delete this extension?"
-    // );
-    // if (confirmDelete) {
-    //   mutation.mutate(id);
-    // }
+  // const removeExtension = (id) => {
+  //   const confirmDelete = window.confirm(
+  //     "Are you sure you want to delete this extension?"
+  //   );
+  //   if (confirmDelete) {
+  //     mutation.mutate(id);
+  //   }
 
-    mutation.mutate(id);
+  //   // mutation.mutate(id);
+  // };
+
+  const removeExtension = (id) => {
+    setPendingDeleteId(id);
+    setModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (pendingDeleteId) {
+      mutation.mutate(pendingDeleteId);
+      setPendingDeleteId(null);
+      setModalOpen(false);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setPendingDeleteId(null);
+    setModalOpen(false);
   };
 
   const filteredExtensions = data?.filter((ext) => {
@@ -94,6 +115,12 @@ function Extension() {
     <section className="flex flex-1 flex-col transition-colors duration-300">
       <Filter filter={filter} setFilter={setFilter} />
       <div className="mt-5 grid lg:grid-cols-3 w-full  md:gap-4 md:grid-cols-2 gap-4">
+        <ConfirmModal
+        open={modalOpen}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        message="Are you sure you want to delete this extension?"
+      />
         {filteredExtensions?.map((extension) => (
           <div
             key={extension.id}

@@ -12,14 +12,14 @@
       "logo": "./src/assets/images/logo-style-spy.svg",
       "name": "StyleSpy",
       "description": "Instantly analyze and copy CSS from any webpage element.",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": "3",
       "logo": "./src/assets/images/logo-speed-boost.svg",
       "name": "SpeedBoost",
       "description": "Optimizes browser resource usage to accelerate page loading.",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": "4",
