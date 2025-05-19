@@ -46,7 +46,7 @@ function Extension() {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["extension", { filter }],
     queryFn: fetchData,
-    staleTime: 1000,
+    staleTime: 1000 * 10, // 10 seconds
   });
 
   const mutation = useMutation({
@@ -115,12 +115,6 @@ function Extension() {
     <section className="flex flex-1 flex-col transition-colors duration-300">
       <Filter filter={filter} setFilter={setFilter} />
       <div className="mt-5 grid lg:grid-cols-3 w-full  md:gap-4 md:grid-cols-2 gap-4">
-        <ConfirmModal
-        open={modalOpen}
-        onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
-        message="Are you sure you want to delete this extension?"
-      />
         {filteredExtensions?.map((extension) => (
           <div
             key={extension.id}
@@ -140,8 +134,8 @@ function Extension() {
             <div className="flex justify-between items-center">
               <button
                 onClick={() => removeExtension(extension.id)}
-                className="button dark:hover:bg-red-500 hover:transition-colors duration-500 
-                hover:text-white"
+                className="button dark:hover:bg-red-500 focus:bg-red-500 hover:transition-colors duration-500 
+                "
               >
                 Remove
               </button>
@@ -152,6 +146,12 @@ function Extension() {
                 handleToggle={() =>
                   handleToggle(extension.id, extension.isActive)
                 }
+              />
+              <ConfirmModal
+                open={modalOpen}
+                onConfirm={handleConfirmDelete}
+                onCancel={handleCancelDelete}
+                message={`Are you sure you want to delete this extension?`}
               />
             </div>
           </div>
