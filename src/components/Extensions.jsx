@@ -4,7 +4,7 @@ import data from "../../data.json";
 function Extensions() {
   // console.log(data);
   return (
-    <section className="w-full">
+    <section className="flex  ">
       <Extension />
     </section>
   );
