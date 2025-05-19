@@ -55,21 +55,6 @@ function Extension() {
     },
   });
 
-  // const toggleMutation = useMutation({
-  //   mutationFn: toggleButton,
-  //   onSuccess: (id) => {
-  //     queryClient.setQueryData(["extension", { filter }], (oldData) =>
-  //       oldData.map((ext) =>
-  //         ext.id === id ? { ...ext, isActive: !ext.isActive } : ext
-  //       )
-  //     );
-  //   },
-  // });
-
-  // const handleToggle = (id) => {
-  //   toggleMutation.mutate(id);
-  // };
-
   const toggleMutation = useMutation({
     mutationFn: toggleButton,
     onSuccess: ({ id, newValue }) => {
@@ -106,9 +91,9 @@ function Extension() {
   if (isError) return <div>Error fetching data</div>;
 
   return (
-    <section>
+    <section className="flex flex-1 flex-col ">
       <Filter filter={filter} setFilter={setFilter} />
-      <div className="mt-5 grid lg:grid-cols-3 w-full md:gap-4 md:grid-cols-2 gap-4">
+      <div className="mt-5 grid lg:grid-cols-3 w-full  md:gap-4 md:grid-cols-2 gap-4">
         {filteredExtensions?.map((extension) => (
           <div
             key={extension.id}
@@ -136,7 +121,6 @@ function Extension() {
                 isActive={extension.isActive}
                 active={active}
                 setActive={setActive}
-                // handleToggle={() => handleToggle(extension.id)}
                 handleToggle={() =>
                   handleToggle(extension.id, extension.isActive)
                 }
