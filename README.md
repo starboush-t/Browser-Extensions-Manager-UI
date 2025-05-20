@@ -5,7 +5,7 @@
 ## Overview
 
 A responsive UI for managing browser extensions, built as a solution to the
- [Frontend Mentor challenge](https://www.frontendmentor.io/challenges/browser-extension-manager-ui-yNZnOfsMAp).
+ [Frontend Mentor challenge](incandescent-flan-c05a6c.netlify.app).
 
 ### Features
 
@@ -87,5 +87,3 @@ A responsive UI for managing browser extensions, built as a solution to the
 - [Frontend Mentor](https://www.frontendmentor.io/) for the challenge and design assets.
 
 ---
-
-_Replace placeholders (like your username and URLs) with your actual information._
