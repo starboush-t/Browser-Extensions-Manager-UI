@@ -1,5 +1,5 @@
-import MoonIcon from "../assets/images/icon-moon.svg";
-import SunIcon from "../assets/images/icon-sun.svg";
+import MoonIcon from "/assets/images/icon-moon.svg";
+import SunIcon from "/assets/images/icon-sun.svg";
 import { useDarkMode } from "../context/ThemeContext";
 
 const DarkModeToggler = () => {
