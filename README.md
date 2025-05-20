@@ -78,7 +78,7 @@ A responsive UI for managing browser extensions, built as a solution to the
 
 ## Author
 
-- [Your Name](https://your-site.com)
+<!-- - [Your Name](https://your-site.com) -->
 - [Frontend Mentor](https://www.frontendmentor.io/profile/yourusername)
 - [Twitter](https://twitter.com/yourusername)
 
