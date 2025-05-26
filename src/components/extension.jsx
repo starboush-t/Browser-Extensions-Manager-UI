@@ -5,7 +5,7 @@ import Filter from "./Filter";
 import ConfirmModal from "./ConfirmModal";
 
 const fetchData = async () => {
-  const response = await fetch("https://brown-jesse-15.tiiny.site/json/data"); // Replace with your JSON file path or API endpoint
+  const response = await fetch("https://brown-jesse-15.tiiny.site/json/data/extensions"); // Replace with your JSON file path or API endpoint
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
