@@ -18,7 +18,7 @@ A responsive UI for managing browser extensions, built as a solution to the
 
 ## Demo
 
-- [Live Site]: (https://fancy-lebkuchen-e1bd4d.netlify.app/)
+- [Live Site](https://fancy-lebkuchen-e1bd4d.netlify.app/)
 
 ## Getting Started
 
