@@ -1,5 +1,4 @@
-{
-  "extensions": [
+[
     {
       "id": "1",
       "logo": "/assets/images/logo-devlens.svg",
@@ -85,4 +84,3 @@
       "isActive": false
     }
   ]
-}
