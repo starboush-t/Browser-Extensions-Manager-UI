@@ -5,7 +5,7 @@ import Filter from "./Filter";
 import ConfirmModal from "./ConfirmModal";
 
 const fetchData = async () => {
-  const response = await fetch("https://brown-jesse-15.tiiny.site/json/data/extensions"); // Replace with your JSON file path or API endpoint
+  const response = await fetch("https://browser-extention-api.onrender.com/extensions"); // Replace with your JSON file path or API endpoint
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -23,7 +23,7 @@ const deleteExtension = async (id) => {
 };
 
 const toggleButton = async ({ id, newValue }) => {
-  const response = await fetch(`http://localhost:3000/extensions/${id}`, {
+  const response = await fetch(`https://browser-extention-api.onrender.com/extensions/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
